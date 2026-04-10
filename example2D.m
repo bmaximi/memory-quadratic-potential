@@ -20,7 +20,7 @@ range = 1:5000;
 phiv(1,1,:) = datav1v1(range); phiv(1,2,:) = datav1v2(range);
 phiv(2,1,:) = phiv(1,2,:); phiv(2,2,:) = datav2v2(range);
 
-phixv(1,1,:) = datax1v1(1:5000); phixv(1,2,:) = datax1v2(range);
+phixv(1,1,:) = datax1v1(range); phixv(1,2,:) = datax1v2(range);
 phixv(2,1,:) = phixv(1,2,:); phixv(2,2,:) = datax2v2(range);
 
 phix(1,1,:) = datax1x1(range); phix(1,2,:) = datax1x2(range);
@@ -37,7 +37,7 @@ for i=1:length(tt)
 end
 
 %%%%%% 2. Sample data
-n = 15;
+n = 18;
 n2 = 2*n;
 twidth = 40;
 
