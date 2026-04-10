@@ -11,7 +11,6 @@ function out = markovianAppPot(y,t,g,r,Omega,opt)
 
 % Output:   out: struct containing the Prony series and Markov parameters
 
-out.flag = 0;
 tau = t(2);
 dim = size(y,1);
 
@@ -30,11 +29,15 @@ out.A = constrSysmat(out.lambdaj,out.gammaj);
 m = size(out.A,1);
 
 % solve Lur'e system
-[Sigma0, G0] = solve_Lure(out.A(1:m-dim,1:m-dim),dim);
+[Sigma0, G0, out.flag] = solve_Lure(out.A(1:m-dim,1:m-dim),dim);
 
 out.Sigma = [eye(dim), zeros(dim,m-dim);...
     zeros(m-2*dim,dim), Sigma0, zeros(m-2*dim,dim);...
     zeros(dim,m-dim), -inv(out.A(1:dim,m-dim+1:m))];
 out.G = [G0; zeros(dim)];
+
+if out.flag == 0
+    fprintf('Reconstruction successful\n')
+end
 
 end
