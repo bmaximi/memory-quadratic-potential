@@ -47,14 +47,14 @@ function gammaj = solve_constr_lsq(lambdaj,y,t,Omega,opt)
     sdp1 = min(eig(reshape(Y3*a,dim,dim))) > 0;
     sdp2 = min(eig(reshape(Psi2*a,dim,dim))) > 0;
     
-    counter = 1; % counter to avoid inf loop below
+    counter = 1; % counter to avoid dead loop below
     
     % if sdp constraints are violated, add it to list of constraints and
     % solve augmented optimization problem
     while (~sdp1 || ~sdp2) & counter <= 2
         cvx_begin quiet sdp
             variable a(m*dim*dim) complex;
-            minimize( norm(b-G*a) );
+            minimize( norm(b-G*a, 'fro') );
             subject to
             B*a == d;
             if ~sdp1
