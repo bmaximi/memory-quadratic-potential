@@ -6,8 +6,8 @@ In order to run the code, you first need to download and install the cvx package
 For a detailed instruction, we refer to https://cvxr.com/cvx/doc/install.html. 
 We used Version 2.2, Build 1148 from 2020 for our numerical tests.
 
-Once the cvx package is properly installed, you can run the example1Dv.m, example2D.m and example1Dp.m.
-The scripts compute the Markovian approximations for the 3 examples provided in [1] and generates the corresponding figures, respectively.
+Once the cvx package is properly installed, you can run the example1D.m and example2D.m.
+The scripts compute the Markovian approximations for the 2 examples provided in [1] and generates the corresponding figures, respectively.
 
 If you want to use this code for your own project, we highly recommend reading the articles [1,2] first to get a better understanding
 of the underlying theory, since the algorithm might fail due to improperly chosen parameters.
