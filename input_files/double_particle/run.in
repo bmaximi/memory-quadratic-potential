@@ -1,0 +1,48 @@
+# ----------------- Init Section -----------------
+
+include "system.in.init"
+
+
+# ----------------- Atom Definition Section -----------------
+
+read_data "system.data"
+
+# ----------------- Settings Section -----------------
+
+include "system.in.settings"
+
+
+# ----------------- Run Section -----------------
+
+# place 555 into the trap  
+group trapped id 555
+fix tether trapped spring/self 100.0
+group outp id 555:556
+
+# simulation setup LE
+timestep 0.005
+fix fxLAN all langevin 1.0 1.0 1 48280
+fix fxNVE all nve 
+
+# output
+thermo 100
+fix rmom all momentum 1000 linear 1 1 1
+#dump h5md1 outp h5md 1 dump_h5md.h5 position image
+#dump h5dmp outp h5md 1 dump_trap.h5 position velocity
+
+run   50000
+
+# simulation setup Nose
+unfix fxLAN
+unfix fxNVE
+fix fxNVT all nvt temp 1.0 1.0 5.0 
+
+run 100000
+
+# output trap
+dump h5dmp outp h5md 1 dump_trap.h5 position velocity
+
+run 10000000
+
+write_data system_after_trap.data
+

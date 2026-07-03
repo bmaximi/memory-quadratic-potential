@@ -1,0 +1,6 @@
+    # -- Styles used in "ForceField" --
+    # -- (Changing these styles will change the formulas above) --
+    units           lj
+    atom_style      full
+    pair_style      lj/cut 1.1225
+    boundary p p p
