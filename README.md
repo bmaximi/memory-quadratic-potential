@@ -14,7 +14,7 @@ If you want to use this code for your own project, we highly recommend reading t
 of the underlying theory, since the algorithm might fail due to improperly chosen parameters.
 
 # References
-[1] Braun M., Wolf N. and Hanke M., On generalized Langevin dynamics in the presence of a quadratic potential, manuscript in preparation.
+[1] Braun M., Wolf N. and Hanke M., Data driven parameterizations of multidimensional generalized Langevin dynamics in the presence of a quadratic potential, manuscript in preparation.
 
 [2] Bockius N., Braun M., Hofmann K., Schmid F. and Hanke M., Determining extended Markov parameterizations for vector-valued
 generalized Langevin equations, Z. Naturforsch. A, vol. 81, no. 2 (2026), pp. 151--171. (DOI: 10.1515/zna-2025-0354)
