@@ -73,10 +73,10 @@ phiv = phiv(:); phix = phix(:); phixv = phixv(:); y = y(:);
 cut = 500; inset = 150:500; prange = 1:cut;
 yellow = [0.929,0.694,0.125];
 
-%%% Normal plots
+%%% VACF, PACF
 figure
-set(gcf, 'Position',  [100, 100, 1000, 800])
-subplot(2,2,1)
+set(gcf, 'Position',  [100, 100, 1000, 400])
+subplot(1,2,1)
 p1 = plot(tt(prange),appvp(prange),'b-','LineWidth',2);
 hold on
 p2 = plot(tt(prange),appv(prange),'-','color',yellow,'LineWidth',2);
@@ -90,31 +90,7 @@ set(gca,'FontSize',14)
 legend([p2,p3,p1,p4],'$\Omega$ known', '$\Omega$ unknown','PACF data','ACF','Location', 'southeast',...
     'FontSize', 12,'interpreter','latex','NumColumns',2);
 
-subplot(2,2,3)
-plot(tt(prange),appxvp(prange),'b-','LineWidth',2);
-hold on
-plot(tt(prange),appxv(prange),'-','color',yellow,'LineWidth',2);
-plot(tt(prange),appxvnoOmega(prange),'r-','LineWidth',2);
-plot(tt(prange),phixv(prange),'k--','LineWidth',2);
-ylabel('$C_{RV}$','interpreter', 'latex','FontSize',16);
-xlabel('t','FontSize',16)
-xlim([0,2.5]);
-grid on;
-set(gca,'FontSize',14)
-
-subplot(2,2,2)
-plot(tt(prange),-appxvp(prange),'b-','LineWidth',2);
-hold on
-plot(tt(prange),-appxv(prange),'-','color',yellow,'LineWidth',2);
-plot(tt(prange),-appxvnoOmega(prange),'r-','LineWidth',2);
-plot(tt(prange),-phixv(prange),'k--','LineWidth',2);
-ylabel('$C_{VR}$','interpreter', 'latex','FontSize',16);
-xlabel('t','FontSize',16)
-xlim([0,2.5]);
-grid on;
-set(gca,'FontSize',14)
-
-subplot(2,2,4)
+subplot(1,2,2)
 plot(tt(prange),appxp(prange),'b-','LineWidth',2);
 hold on
 plot(tt(prange),appx(prange),'-','color',yellow,'LineWidth',2);
@@ -131,8 +107,8 @@ yticks_val = 10.^(-6:2:0);
 ytick_labels = cellstr(num2str(round(log10(yticks_val(:))), '10^{%d}'));
 
 figure
-set(gcf, 'Position',  [100, 100, 1000, 800])
-subplot(2,2,1);
+set(gcf, 'Position',  [100, 100, 1000, 400])
+subplot(1,2,1);
 p1 = semilogy(tt(prange),abs(appvp(prange)-phiv(prange)),'b-','LineWidth',2);
 hold on
 p2 = semilogy(tt(prange),abs(appv(prange)-phiv(prange)),'-','color',yellow,'LineWidth',2);
@@ -147,33 +123,7 @@ legend([p2,p3,p1,p4],'$\Omega$ known', '$\Omega$ unknown','PACF data','ACF', 'Lo
     'FontSize', 12, 'interpreter', 'latex')
 set(gca,'FontSize',14);
 
-subplot(2,2,2);
-semilogy(tt(prange),abs(-appxvp(prange)+phixv(prange)),'b-','LineWidth',2);
-hold on
-semilogy(tt(prange),abs(-appxv(prange)+phixv(prange)),'-','color',yellow,'LineWidth',2);
-semilogy(tt(prange),abs(-appxvnoOmega(prange)+phixv(prange)),'r','LineWidth',2);
-semilogy(tt(prange),abs(phixv(prange)),'k--','LineWidth',2);
-grid on;
-xlim([0,2.5]);
-ylim([1e-7,1e0]); yticks(yticks_val); yticklabels(ytick_labels);
-xlabel('t','FontSize',16);
-ylabel('$\Delta C_{VR}$','interpreter','latex','FontSize',16);
-set(gca,'FontSize',14);
-
-subplot(2,2,3);
-semilogy(tt(prange),abs(appxvp(prange)-phixv(prange)),'b-','LineWidth',2);
-hold on
-semilogy(tt(prange),abs(appxv(prange)-phixv(prange)),'-','color',yellow,'LineWidth',2);
-semilogy(tt(prange),abs(appxvnoOmega(prange)-phixv(prange)),'r','LineWidth',2);
-semilogy(tt(prange),abs(-phixv(prange)),'k--','LineWidth',2);
-grid on;
-xlim([0,2.5]);
-ylim([1e-7,1e0]); yticks(yticks_val); yticklabels(ytick_labels);
-xlabel('t','FontSize',16);
-ylabel('$\Delta C_{RV}$','interpreter','latex','FontSize',16);
-set(gca,'FontSize',14);
-
-subplot(2,2,4);
+subplot(1,2,2);
 semilogy(tt(prange),abs(appxp(prange)-phix(prange)),'b-','LineWidth',2);
 hold on
 semilogy(tt(prange),abs(appx(prange)-phix(prange)),'-','color',yellow,'LineWidth',2);

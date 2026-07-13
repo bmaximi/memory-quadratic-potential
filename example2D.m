@@ -69,7 +69,7 @@ for i=1:length(tt)
     appxnoOmega(:,:,i) = E2'*expm(tt(i)*A2)*Sigma2*E2;
 end
 
-%%%%%%% VACF normal
+%%%%%%% VACF, PACF diagonal entries
 pcut = 4;
 cut = 8;
 inset = (pcut/0.0025)+1:cut/0.0025;
@@ -99,50 +99,9 @@ plot(h, tt(inset), reshape(phiv(1,1,inset),[],1), 'k--','LineWidth',2);
 xlim([pcut,cut])
 grid on
 set(gca,'FontSize',11);
-% V1V2
-subplot(2,2,2)
-plot(tt,reshape(appv(1,2,:),[],1),'b-','LineWidth',2);
-hold on
-plot(tt,reshape(appvnoOmega(1,2,:),[],1),'r-','LineWidth',2);
-plot(tt,reshape(phiv(1,2,:),[],1),'k--','LineWidth',2);
-ylabel('$C_{V_1V_2}$','interpreter','latex','FontSize',16);
-xlabel('t','FontSize',16);
-xlim([0,cut]);
-grid on;
-set(gca,'FontSize',18)
 
-p = get(gca,'Position');
-h = axes('Parent',gcf,'Position',[p(1)+0.13, p(2)+0.17, p(3)-0.15, p(4)-0.2]);
-hold(h);
-plot(h, tt(inset), reshape(appv(1,2,inset),[],1), 'b-','LineWidth',2);
-plot(h, tt(inset), reshape(appvnoOmega(1,2,inset),[],1), 'r-','LineWidth',2);
-plot(h, tt(inset), reshape(phiv(1,2,inset),[],1), 'k--','LineWidth',2);
-xlim([pcut,cut])
-grid on
-set(gca,'FontSize',11);
-% V2V1
-subplot(2,2,3)
-plot(tt,reshape(appv(2,1,:),[],1),'b-','LineWidth',2);
-hold on
-plot(tt,reshape(appvnoOmega(2,1,:),[],1),'r-','LineWidth',2);
-plot(tt,reshape(phiv(2,1,:),[],1),'k--','LineWidth',2);
-ylabel('$C_{V_2V_1}$','interpreter','latex','FontSize',16);
-xlabel('t','FontSize',16);
-xlim([0,cut]);
-grid on;
-set(gca,'FontSize',18)
-
-p = get(gca,'Position');
-h = axes('Parent',gcf,'Position',[p(1)+0.13, p(2)+0.17, p(3)-0.15, p(4)-0.2]);
-hold(h);
-plot(h, tt(inset), reshape(appv(2,1,inset),[],1), 'b-','LineWidth',2);
-plot(h, tt(inset), reshape(appvnoOmega(2,1,inset),[],1), 'r-','LineWidth',2);
-plot(h, tt(inset), reshape(phiv(2,1,inset),[],1), 'k--','LineWidth',2);
-xlim([pcut,cut])
-grid on
-set(gca,'FontSize',11);
 % V2V2
-subplot(2,2,4)
+subplot(2,2,2)
 plot(tt,reshape(appv(2,2,:),[],1),'b-','LineWidth',2);
 hold on
 plot(tt,reshape(appvnoOmega(2,2,:),[],1),'r-','LineWidth',2);
@@ -163,11 +122,8 @@ xlim([pcut,cut])
 grid on
 set(gca,'FontSize',11);
 
-%%%%%%% PACF normal
-figure
-set(gcf,'Position',[100,100,1000,800]);
-% X1X1
-subplot(2,2,1)
+% R1R1
+subplot(2,2,3)
 plot(tt,reshape(appx(1,1,:),[],1),'b-','LineWidth',2);
 hold on
 plot(tt,reshape(appxnoOmega(1,1,:),[],1),'r-','LineWidth',2);
@@ -188,53 +144,7 @@ xlim([pcut,cut])
 grid on
 set(gca,'FontSize',11);
 
-% X1X2
-subplot(2,2,2)
-plot(tt,reshape(appx(1,2,:),[],1),'b-','LineWidth',2);
-hold on
-plot(tt,reshape(appxnoOmega(1,2,:),[],1),'r-','LineWidth',2);
-plot(tt,reshape(phix(1,2,:),[],1),'k--','LineWidth',2);
-ylabel('$C_{R_1R_2}$','interpreter','latex','FontSize',16);
-xlabel('t','FontSize',16);
-xlim([0,cut]);
-grid on;
-set(gca,'FontSize',18)
-legend('$\Omega$ known', '$\Omega$ unknown', 'ACF', 'Location', [0.667, 0.603, 0.234, 0.062],...
-    'FontSize', 14,'interpreter','latex','NumColumns',2);
-
-p = get(gca,'Position');
-h = axes('Parent',gcf,'Position',[p(1)+0.13, p(2)+0.17, p(3)-0.15, p(4)-0.2]);
-hold(h);
-plot(h, tt(inset), reshape(appx(1,2,inset),[],1), 'b-','LineWidth',2);
-plot(h, tt(inset), reshape(appxnoOmega(1,2,inset),[],1), 'r-','LineWidth',2);
-plot(h, tt(inset), reshape(phix(1,2,inset),[],1), 'k--','LineWidth',2);
-xlim([pcut,cut])
-grid on
-set(gca,'FontSize',11);
-
-% X2X1
-subplot(2,2,3)
-plot(tt,reshape(appx(2,1,:),[],1),'b-','LineWidth',2);
-hold on
-plot(tt,reshape(appxnoOmega(2,1,:),[],1),'r-','LineWidth',2);
-plot(tt,reshape(phix(2,1,:),[],1),'k--','LineWidth',2);
-ylabel('$C_{R_2R_1}$','interpreter','latex','FontSize',16);
-xlabel('t','FontSize',16);
-xlim([0,cut]);
-grid on;
-set(gca,'FontSize',18)
-
-p = get(gca,'Position');
-h = axes('Parent',gcf,'Position',[p(1)+0.13, p(2)+0.17, p(3)-0.15, p(4)-0.2]);
-hold(h);
-plot(h, tt(inset), reshape(appx(2,1,inset),[],1), 'b-','LineWidth',2);
-plot(h, tt(inset), reshape(appxnoOmega(2,1,inset),[],1), 'r-','LineWidth',2);
-plot(h, tt(inset), reshape(phix(2,1,inset),[],1), 'k--','LineWidth',2);
-xlim([pcut,cut])
-grid on
-set(gca,'FontSize',11);
-
-% X2X2
+% R2R2
 subplot(2,2,4)
 plot(tt,reshape(appx(2,2,:),[],1),'b-','LineWidth',2);
 hold on
@@ -271,7 +181,7 @@ for i=1:length(tt)
 end
 
 figure
-set(gcf,'Position',[100,100,1200,600]);
+set(gcf,'Position',[100,100,1000,400]);
 subplot(1,2,1)
 semilogy(tt,errv,'LineWidth',2)
 hold on
@@ -280,6 +190,7 @@ semilogy(tt,errx,'LineWidth',2)
 semilogy(tt,phivfro,'k--','LineWidth',2)
 xlim([0,10]);
 ylim([1e-5,1e0])
+yticks([1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0])
 xlabel('t')
 ylabel('$\Vert\Delta C(t) \Vert_F$','Interpreter','latex')
 grid on
@@ -295,6 +206,7 @@ semilogy(tt,errxnok,'LineWidth',2)
 semilogy(tt,phivfro,'k--','LineWidth',2)
 xlim([0,10]);
 ylim([1e-5,1e0]);
+yticks([1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0])
 xlabel('t')
 ylabel('$\Vert\Delta C(t) \Vert_F$','Interpreter','latex')
 grid on
